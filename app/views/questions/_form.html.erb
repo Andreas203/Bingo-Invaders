@@ -1,22 +1,18 @@
+<%= form_for(@question) do |f| %>
+  <div class="field">
+    <%= f.label :site_name %><br>
+    <%= f.text_field :site_name %>
+  </div>
+  <div class="field">
+    <%= f.label :security_question %><br>
+    <%= f.text_area :security_question %>
+  </div>
+    <div class="field">
+    <%= f.label :security_answer %><br>
+    <%= f.text_area :security_answer %>
+  </div>
 
-<%= form_with model: @question, local: true do |form| %> 
-  <p>
-    <%= form.label :site_name %><br>
-    <%= form.text_field :site_name %>
-  </p>
- 
-  <p>
-    <%= form.label :security_question %><br>
-    <%= form.text_area :security_question %>
-  </p>
-
-  <p>
-    <%= form.label :security_answer %><br>
-    <%= form.text_area :security_answer %>
-  </p>
- 
-  <p>
-    <%= form.submit %>
-  </p>
- 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
