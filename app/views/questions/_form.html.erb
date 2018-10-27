@@ -1,0 +1,22 @@
+
+<%= form_with model: @question, local: true do |form| %> 
+  <p>
+    <%= form.label :site_name %><br>
+    <%= form.text_field :site_name %>
+  </p>
+ 
+  <p>
+    <%= form.label :security_question %><br>
+    <%= form.text_area :security_question %>
+  </p>
+
+  <p>
+    <%= form.label :security_answer %><br>
+    <%= form.text_area :security_answer %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>

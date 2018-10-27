@@ -1,0 +1,22 @@
+<h1>Listing security questions</h1>
+<td><%= link_to 'New', new_question_path %></td>
+ 
+<table>
+  <tr>
+    <th>Site name</th>
+    <th>Security Question</th>
+    <th></th>
+  </tr>
+ 
+  <% @questions.each do |question| %>
+    <tr>
+      <td><%= question.site_name %></td>
+      <td><%= question.security_question %></td>
+      <td><%= link_to 'Show', question_path(question) %></td>
+      <td><%= link_to 'Edit', edit_question_path(question) %></td>
+      <td><%= link_to 'Destroy', question_path(question),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
