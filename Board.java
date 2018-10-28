@@ -1,5 +1,7 @@
-
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,6 +20,7 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 public class Board extends JPanel implements Runnable, Commons {
 
@@ -36,6 +39,9 @@ public class Board extends JPanel implements Runnable, Commons {
     private boolean ingame = true;
     private final String explImg = "images/explosion.png";
     private String message = "Game Over";
+    private String messageTwo = "Press Space to play again!";
+    private String messageThree = "Or";
+    private String messageFour = "Press Escape to quit!";
 
     private Thread animator;
 
@@ -84,7 +90,6 @@ public class Board extends JPanel implements Runnable, Commons {
           System.out.print(playerCard.get(i));
         }
         System.out.println(l);
-        System.out.println("yeaboi");
 
 
         for (int i = 0; i < 5; i++) {
@@ -238,9 +243,9 @@ public class Board extends JPanel implements Runnable, Commons {
         g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
 
         g.setColor(new Color(0, 32, 48));
-        g.fillRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 50);
+        g.fillRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 100);
         g.setColor(Color.white);
-        g.drawRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 50);
+        g.drawRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 100);
 
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = this.getFontMetrics(small);
@@ -249,9 +254,14 @@ public class Board extends JPanel implements Runnable, Commons {
         g.setFont(small);
         g.drawString(message, (BOARD_WIDTH - metr.stringWidth(message)) / 2,
                 BOARD_WIDTH / 2);
-
-
+        g.drawString(messageTwo, (BOARD_WIDTH - metr.stringWidth(messageTwo)) / 2,
+                BOARD_WIDTH / 2 + 20);
+        g.drawString(messageThree, (BOARD_WIDTH - metr.stringWidth(messageThree)) / 2,
+                BOARD_WIDTH / 2 + 40);
+        g.drawString(messageFour, (BOARD_WIDTH - metr.stringWidth(messageFour)) / 2,
+                BOARD_WIDTH / 2 + 60);
     }
+
 
     public void animationCycle() {
         int counter = 0;
@@ -467,6 +477,15 @@ public class Board extends JPanel implements Runnable, Commons {
                         shot = new Shot(x, y);
                     }
                 }
+                else {
+                    EventQueue.invokeLater(() -> {
+                    SpaceInvaders ex = new SpaceInvaders();
+                    ex.setVisible(true);
+                    });
+                }
+            }
+            else if (key == KeyEvent.VK_ESCAPE && !ingame) {
+                System.exit(1);
             }
         }
     }
