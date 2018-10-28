@@ -213,18 +213,19 @@ public class Board extends JPanel implements Runnable, Commons {
 
               if (deadAliens.contains(playerCard.get(i))) {
                 g.setColor(Color.red);
-                g.drawString(String.valueOf(playerCard.get(i)),x+120, y);
+                g.drawString(String.valueOf(playerCard.get(i)),x+140, y);
               }
               else {
                 g.setColor(Color.green);
-                g.drawString(String.valueOf(playerCard.get(i)),x+120, y);
+                g.drawString(String.valueOf(playerCard.get(i)),x+140, y);
               }
               //numberToString = numberToString + ",\n " + String.valueOf(playerCard.get(i));
               //if (i == 4 || i == 9 || i == 14 || i == 19 || i == 24) {
               //  numberToString = numberToString + "\n";
               //}
             }
-            g.drawString(numberToString, 0, 350);
+            g.setColor(Color.blue);
+            g.drawString("Welcome to Bingo Invaders, complete a row to win!", 150, 500);
             drawAliens(g);
             drawPlayer(g);
             drawShot(g);
@@ -264,13 +265,43 @@ public class Board extends JPanel implements Runnable, Commons {
 
 
     public void animationCycle() {
-        int counter = 0;
+        int counter1 = 0;
+        int counter2 = 0;
+        int counter3 = 0;
+        int counter4 = 0;
+        int counter5 = 0;
+        int counter6 = 0;
         for (int i = 0; i < playerCard.size(); i ++) {
           if (deadAliens.contains(playerCard.get(i))) {
-            counter ++;
+            counter1 ++;
           }
         }
-        if (counter == 25) {
+        for (int i = 0; i <5; i++) {
+          if (deadAliens.contains(playerCard.get(i))) {
+            counter2 ++;
+          }
+        }
+        for (int i = 5; i <10; i++) {
+          if (deadAliens.contains(playerCard.get(i))) {
+            counter3 ++;
+          }
+        }
+        for (int i = 10; i <15; i++) {
+          if (deadAliens.contains(playerCard.get(i))) {
+            counter4 ++;
+          }
+        }
+        for (int i = 15; i <20; i++) {
+          if (deadAliens.contains(playerCard.get(i))) {
+            counter5 ++;
+          }
+        }
+        for (int i = 20; i <25; i++) {
+          if (deadAliens.contains(playerCard.get(i))) {
+            counter6 ++;
+          }
+        }
+        if (counter1 == 25 || counter2 == 5 || counter3 == 5 || counter4 == 5|| counter5 == 5 || counter6 ==5) {
           ingame = false;
           message = "Game Won!";
         }
