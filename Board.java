@@ -23,6 +23,8 @@ public class Board extends JPanel implements Runnable, Commons {
 
     private Dimension d;
     private ArrayList<Alien> aliens;
+    public ArrayList<Integer> playerCard = new ArrayList<>();
+    public ArrayList<Integer> deadAliens = new ArrayList<>();
     private Player player;
     private Shot shot;
 
@@ -71,8 +73,16 @@ public class Board extends JPanel implements Runnable, Commons {
         }
 
         ArrayList<Integer> l = new ArrayList<Integer>(Arrays.asList(bingoNumbers));
+        ArrayList<Integer> l2 = new ArrayList<Integer>(Arrays.asList(bingoNumbers));
         //List<Integer> l = Arrays.asList(bingoNumbers);
         Collections.shuffle(l);
+        Collections.shuffle(l2);
+        for (int i = 0; i<25; i++) {
+          playerCard.add(l2.get(i));
+        }
+        for (int i = 0; i<playerCard.size(); i++) {
+          System.out.print(playerCard.get(i));
+        }
         System.out.println(l);
         System.out.println("yeaboi");
 
@@ -159,7 +169,23 @@ public class Board extends JPanel implements Runnable, Commons {
 
         if (ingame) {
 
-            g.drawLine(0, GROUND, BOARD_WIDTH, GROUND);
+            g.drawLine(0, 300, BOARD_WIDTH, 300);
+            String numberToString = "";
+            for (int i = 0; i<playerCard.size(); i ++) {
+              if (deadAliens.contains(playerCard.get(i))) {
+                g.setColor(Color.red);
+                g.drawString(String.valueOf(playerCard.get(i)),i*20, 350);
+              }
+              else {
+                g.setColor(Color.green);
+                g.drawString(String.valueOf(playerCard.get(i)),i*20, 350);
+              }
+              //numberToString = numberToString + ",\n " + String.valueOf(playerCard.get(i));
+              //if (i == 4 || i == 9 || i == 14 || i == 19 || i == 24) {
+              //  numberToString = numberToString + "\n";
+              //}
+            }
+            g.drawString(numberToString, 0, 350);
             drawAliens(g);
             drawPlayer(g);
             drawShot(g);
@@ -189,10 +215,21 @@ public class Board extends JPanel implements Runnable, Commons {
         g.setFont(small);
         g.drawString(message, (BOARD_WIDTH - metr.stringWidth(message)) / 2,
                 BOARD_WIDTH / 2);
+
+
     }
 
     public void animationCycle() {
-
+        int counter = 0;
+        for (int i = 0; i < playerCard.size(); i ++) {
+          if (deadAliens.contains(playerCard.get(i))) {
+            counter ++;
+          }
+        }
+        if (counter == 25) {
+          ingame = false;
+          message = "Game Won!";
+        }
         if (deaths == NUMBER_OF_ALIENS_TO_DESTROY) {
 
             ingame = false;
@@ -222,7 +259,12 @@ public class Board extends JPanel implements Runnable, Commons {
                                 = new ImageIcon(explImg);
                         alien.setImage(ii.getImage());
                         alien.setDying(true);
-                        System.out.println(alien.getNumber());
+                        int alienNumber = alien.getNumber();
+                        deadAliens.add(alienNumber);
+                        for (int i = 0; i<deadAliens.size(); i ++) {
+                          System.out.println(deadAliens.get(i));
+                        }
+                        //System.out.println(alien.getNumber());
                         deaths++;
                         shot.die();
                     }
