@@ -171,14 +171,48 @@ public class Board extends JPanel implements Runnable, Commons {
 
             g.drawLine(0, 300, BOARD_WIDTH, 300);
             String numberToString = "";
+            int y = 0;
+            int x = 0;
             for (int i = 0; i<playerCard.size(); i ++) {
+
+              if (i<5) {
+                y = 350;
+              }
+              else if (i>=5 && i<10) {
+                y = 375;
+              }
+              else if (i>=10 && i<15) {
+                y = 400;
+              }
+              else if (i>=15 && i<20) {
+                y = 425;
+              }
+              else if (i>=20 && i<25) {
+                y = 450;
+              }
+              if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20) {
+                x = 50;
+              }
+              else if (i == 1 || i == 6 || i == 11 || i == 16 || i == 21){
+                x = 100;
+              }
+              else if (i == 2 || i == 7 || i == 12 || i == 17 || i == 22){
+                x = 150;
+              }
+              else if (i == 3 || i == 8 || i == 13 || i == 18 || i == 23){
+                x = 200;
+              }
+              else if (i == 4 || i == 9 || i == 14 || i == 19 || i == 24){
+                x = 250;
+              }
+
               if (deadAliens.contains(playerCard.get(i))) {
                 g.setColor(Color.red);
-                g.drawString(String.valueOf(playerCard.get(i)),i*20, 350);
+                g.drawString(String.valueOf(playerCard.get(i)),x+120, y);
               }
               else {
                 g.setColor(Color.green);
-                g.drawString(String.valueOf(playerCard.get(i)),i*20, 350);
+                g.drawString(String.valueOf(playerCard.get(i)),x+120, y);
               }
               //numberToString = numberToString + ",\n " + String.valueOf(playerCard.get(i));
               //if (i == 4 || i == 9 || i == 14 || i == 19 || i == 24) {
