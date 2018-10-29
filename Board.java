@@ -415,7 +415,7 @@ public class Board extends JPanel implements Runnable, Commons {
             int shot = generator.nextInt(15);
             Alien.Bomb b = alien.getBomb();
 
-            if (shot == CHANCE && alien.isVisible() && b.isDestroyed()) {
+            if (shot == CHANCE && alien.isVisible() && b.isDestroyed() && b.getBombNumb() > 50) {
 
                 b.setDestroyed(false);
                 b.setX(alien.getX());

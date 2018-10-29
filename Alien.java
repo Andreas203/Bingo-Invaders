@@ -21,7 +21,8 @@ public class Alien extends Sprite {
         String alienImg = "images/(" + n + ").png";
         ImageIcon ii = new ImageIcon("images/(" + n + ").png");
         setImage(ii.getImage());
-        bomb = new Bomb(x, y);
+
+        bomb = new Bomb(x, y, n);
 
 
 
@@ -46,22 +47,26 @@ public class Alien extends Sprite {
 
         private final String bombImg = "images/bomb.png";
         private boolean destroyed;
+        private Integer bombNumb;
 
-        public Bomb(int x, int y) {
+        public Bomb(int x, int y, Integer n) {
 
-            initBomb(x, y);
+            initBomb(x, y, n);
         }
 
-        private void initBomb(int x, int y) {
+        private void initBomb(int x, int y, Integer n) {
 
             setDestroyed(true);
+            this.bombNumb = n;
             this.x = x;
             this.y = y;
             ImageIcon ii = new ImageIcon(bombImg);
             setImage(ii.getImage());
 
         }
-
+        public Integer getBombNumb() {
+          return bombNumb;
+        }
         public void setDestroyed(boolean destroyed) {
 
             this.destroyed = destroyed;
